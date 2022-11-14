@@ -15,7 +15,10 @@ public class GameOverRetry : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
     }
 
     public void NewGame()
