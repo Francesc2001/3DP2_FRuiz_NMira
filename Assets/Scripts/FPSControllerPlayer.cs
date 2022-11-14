@@ -65,7 +65,8 @@ public class FPSControllerPlayer : MonoBehaviour
 
     bool m_Shooting = false;
 
-
+    private int m_Size;
+    public List<float> m_SizeNumbers = new List<float>();
 
     public float m_Health;
     public float m_bullets = 10;
@@ -111,6 +112,13 @@ public class FPSControllerPlayer : MonoBehaviour
         //SetIdleWeaponAnimation();
         m_StartPosition = transform.position;
         m_StartRotation = transform.rotation;
+
+        m_SizeNumbers.Add(50);
+        m_SizeNumbers.Add(1);
+        m_SizeNumbers.Add(200);
+        m_SizeNumbers[0] = 0.5f;
+        m_SizeNumbers[1] = 1;
+        m_SizeNumbers[2] = 2;
 
         m_BluePortal.gameObject.SetActive(false);
         m_OrangePortal.gameObject.SetActive(false);
@@ -252,6 +260,20 @@ public class FPSControllerPlayer : MonoBehaviour
         {
             UpdateAttachObject();
         }
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            if (!(m_Size >= 2))
+            {
+                m_Size++;
+            }
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            if (!(m_Size <= 0))
+            {
+                m_Size--;
+            }
+        }
     }
 
         void UpdateInputDebug()
@@ -281,7 +303,14 @@ public class FPSControllerPlayer : MonoBehaviour
                 m_ObjectAttached.transform.SetParent(null);
                 m_ObjectAttached.isKinematic = false;
                 m_ObjectAttached.AddForce(m_PitchController.forward * force);
-                m_ObjectAttached.GetComponent<Companion>().SetAttached(false);
+                if (m_ObjectAttached.CompareTag("Cube"))
+                {
+                    m_ObjectAttached.GetComponent<Companion>().SetAttached(false);
+                }
+                else if (m_ObjectAttached.CompareTag("Turret"))
+                {
+                    m_ObjectAttached.GetComponent<Turret>().SetAttached(false);
+                }
                 m_ObjectAttached = null;
             }
         }
@@ -328,6 +357,14 @@ public class FPSControllerPlayer : MonoBehaviour
                 m_ObjectAttached.isKinematic = true;
                 m_AttachingObjectStartRotation = l_RaycastHit.collider.transform.rotation;
             }
+            if (l_RaycastHit.collider.tag == "Turret")
+            {
+                m_AttachingObject = true;
+                m_ObjectAttached = l_RaycastHit.collider.GetComponent<Rigidbody>();
+                m_ObjectAttached.GetComponent<Turret>().SetAttached(true);
+                m_ObjectAttached.isKinematic = true;
+                m_AttachingObjectStartRotation = l_RaycastHit.collider.transform.rotation;
+            }
         }
     }
 
@@ -340,6 +377,7 @@ public class FPSControllerPlayer : MonoBehaviour
         {
             Vector3 l_Position;
             Vector3 l_Normal;
+            _Portal.transform.localScale = Vector3.one * ReturnSize();
 
             if (_Portal.IsValidPosition(m_Camera.transform.position, m_Camera.transform.forward, m_MaxShootDistance, m_ShootingLayerMask, out l_Position, out l_Normal))
             {
@@ -384,11 +422,16 @@ public class FPSControllerPlayer : MonoBehaviour
         m_CharacterController.enabled = true;
     }
 
+    public float ReturnSize()
+    {
+        return m_SizeNumbers[m_Size];
+    }
+
     public void Die()
     {
         m_Health = 0.0f;
 
-        SceneManager.LoadSceneAsync("GameOver");
+        SceneManager.LoadScene("GameOver");
         //GameController.GetGameController().RestartGame();
     }
 }

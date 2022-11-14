@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
@@ -13,6 +14,12 @@ public class Portal : MonoBehaviour
     public float m_MinValidDistance = 0.1f;
     public float m_MaxValidDistance = 9f;
     public float m_MinDotValidAngle = 0.995f;
+    public LineRenderer m_lineRenderer;
+
+    void Start()
+    {
+        m_lineRenderer.gameObject.SetActive(false);
+    }
 
     void LateUpdate()
     {
@@ -26,6 +33,12 @@ public class Portal : MonoBehaviour
 
         float l_Distance = Vector3.Distance(m_MirrorPortal.m_Camera.transform.position, m_MirrorPortal.transform.position);
         m_MirrorPortal.m_Camera.nearClipPlane = l_Distance + m_OffsetNearPlane;
+
+
+        if (m_lineRenderer.gameObject.CompareTag("Player"))
+        {
+            SceneManager.LoadScene("GameOver");
+        }
     }
 
     public bool IsValidPosition(Vector3 StartPosition, Vector3 forward, float MaxDistance, LayerMask PortalLayerMask, out Vector3 Position, out Vector3 Normal)
@@ -63,15 +76,20 @@ public class Portal : MonoBehaviour
                             {
                                 Debug.Log("Not Valid");
                                 l_Valid = false;
+                                m_lineRenderer.gameObject.SetActive(false);
                             }
                         }
                         else
+                        {
                             l_Valid = false;
+                            m_lineRenderer.gameObject.SetActive(false);
+                        }
                     }
                     else
                     {
                         Debug.Log("Not Valid");
                         l_Valid = false;
+                        m_lineRenderer.gameObject.SetActive(false);
                     }
                 }
             }

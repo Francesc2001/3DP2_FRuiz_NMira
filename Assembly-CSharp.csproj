@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{A14DA9F9-B9C2-03F9-750E-8468A341979E}</ProjectGuid>
+    <ProjectGuid>{7773E408-313C-5779-575E-73728C7BA2BE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BulletCounter.cs" />
+    <Compile Include="Assets\Scripts\GameOverRetry.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\Portal.cs" />
     <Compile Include="Assets\Scripts\FPSControllerPlayer.cs" />
@@ -72,7 +73,6 @@
     <Compile Include="Assets\Scripts\PortalButton.cs" />
     <Compile Include="Assets\Scripts\Companion.cs" />
     <Compile Include="Assets\Scripts\Shield.cs" />
-    <Compile Include="Assets\Scripts\GameOverRetry.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\PortalAssets\Materials\PortalShader.shader" />
