@@ -311,6 +311,10 @@ public class FPSControllerPlayer : MonoBehaviour
                 {
                     m_ObjectAttached.GetComponent<Turret>().SetAttached(false);
                 }
+                else if (m_ObjectAttached.CompareTag("RefractionCube"))
+                {
+                    m_ObjectAttached.GetComponent<RefractionCube>().SetAttached(false);
+                }
                 m_ObjectAttached = null;
             }
         }
@@ -362,6 +366,14 @@ public class FPSControllerPlayer : MonoBehaviour
                 m_AttachingObject = true;
                 m_ObjectAttached = l_RaycastHit.collider.GetComponent<Rigidbody>();
                 m_ObjectAttached.GetComponent<Turret>().SetAttached(true);
+                m_ObjectAttached.isKinematic = true;
+                m_AttachingObjectStartRotation = l_RaycastHit.collider.transform.rotation;
+            }
+            if (l_RaycastHit.collider.tag == "RefractionCube")
+            {
+                m_AttachingObject = true;
+                m_ObjectAttached = l_RaycastHit.collider.GetComponent<Rigidbody>();
+                m_ObjectAttached.GetComponent<RefractionCube>().SetAttached(true);
                 m_ObjectAttached.isKinematic = true;
                 m_AttachingObjectStartRotation = l_RaycastHit.collider.transform.rotation;
             }
