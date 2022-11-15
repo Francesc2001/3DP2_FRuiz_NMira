@@ -9,6 +9,8 @@ TagManager:
   - RefractionCube
   - Cube
   - Turret
+  - DeathZone
+  - Laser
   layers:
   - Default
   - TransparentFX
