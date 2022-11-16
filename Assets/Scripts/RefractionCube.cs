@@ -16,7 +16,7 @@ public class RefractionCube : MonoBehaviour
     void Start()
     {
         m_RigidBody = GetComponent<Rigidbody>();
-        m_RefractionEnabled = false;
+        m_RefractionEnabled = true;
     }
 
     // Update is called once per frame
