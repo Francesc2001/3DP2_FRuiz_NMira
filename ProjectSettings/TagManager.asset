@@ -11,6 +11,7 @@ TagManager:
   - Turret
   - DeathZone
   - Laser
+  - WinZone
   layers:
   - Default
   - TransparentFX

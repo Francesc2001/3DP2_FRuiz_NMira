@@ -73,6 +73,8 @@
     <Compile Include="Assets\Scripts\PortalButton.cs" />
     <Compile Include="Assets\Scripts\Companion.cs" />
     <Compile Include="Assets\Scripts\Shield.cs" />
+    <Compile Include="Assets\Scripts\SceneChangeGameOver.cs" />
+    <Compile Include="Assets\Scripts\GameWon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\PortalAssets\Materials\PortalShader.shader" />

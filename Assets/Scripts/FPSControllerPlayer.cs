@@ -404,7 +404,7 @@ public class FPSControllerPlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) //si colisiona
     {
-        if (other.tag == "WallKill")
+        if (other.tag == "DeathZone")
         {
             Die();
         }
@@ -415,6 +415,10 @@ public class FPSControllerPlayer : MonoBehaviour
             {
                 Teleport(other.GetComponent<Portal>());
             }
+        }
+        if (other.tag == "WinZone")
+        {
+            SceneManager.LoadScene("GameWon");
         }
     }
 
